@@ -1,0 +1,530 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif
+}
+
+a  {
+    color: #fff;
+    text-decoration: none
+}
+
+body > header {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 5px 2px;
+    margin-top: 4px;
+    align-items: center;
+    box-shadow: 0 10px 30px rgb(16 14 45 / 30%);
+    background-color: #100e2d
+}
+
+body {
+    background-color: #221f42;
+    border: none
+}
+
+form {
+    border: none
+}
+
+legend {
+    display: flex;
+    text-align: center
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    margin-right: 10px
+}
+
+h1, h2, h4, p, label, .posInvit, .titleIndex h1 {
+    color: #fff
+}
+
+footer p {
+    color:#808080;
+    font-size: 1.17em;
+    font-weight: 600
+}
+
+input, textarea, legend {
+    font-size: 20px;
+    background-color: #221f42;
+    color: #fff
+}
+
+.menu {
+    margin-left: 30px
+}
+
+.menu li {
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px
+}
+
+.menu a {
+    font-weight: 700;
+    color: #fff;
+    padding-bottom: 3px
+}
+
+.pageOuverte a {
+    transition: .1s;
+    border-bottom: solid 2px #5BA8E4;
+    text-transform: uppercase;
+    color: #fff
+}
+
+.nonOuverte a {
+    transition: all .1s ease-in-out;
+    text-transform: uppercase;
+    border-bottom: solid 2px #100e2d
+}
+
+.nonOuverte a:hover, .pageOuverte a:hover {
+    cursor: pointer;
+    color: #5BA8E4;
+    margin-right: auto;
+    border-bottom: solid 2px #5BA8E4
+}
+
+button {
+    text-transform: uppercase;
+    transition: .2s
+}
+
+.search {
+    display: flex;
+    flex-wrap: initial;
+    height: 33px
+}
+
+.search input {
+    outline: none;
+    border: solid 2px #2a284d;
+    border-right: none
+}
+
+.search button {
+    color: #5f5f5f;
+    border: none;
+    background-color: #303030;
+    text-decoration: none;
+    padding: 6px;
+    width: 3em
+}
+
+.profilBulle {
+    margin-top: auto
+}
+
+.profilBulle img {
+    border-radius: 25px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 4px
+}
+
+.profilBulle img:hover {
+    background: linear-gradient(90deg,#7945f7,#ee8bf7)
+}
+
+.profil {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin: 10px 25px
+}
+
+.profil header {
+    margin-left: 20px;
+    padding-bottom: 10px
+}
+
+.profil h4 {
+    padding-top: 7px;
+    padding-bottom: 30px;
+    margin-left: 10px
+}
+
+.infos {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 10px;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 15px;
+    border-color: #5BA8E4
+}
+
+.posBoutonProfil {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 10px
+}
+
+.posBoutonFacture {
+    display: flex;
+    padding-left: 10px
+}
+
+.inscription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    padding-top: 6em
+}
+
+.inscription h2 {
+    padding-bottom: 10px
+}
+
+h1 {
+    display: flex;
+    justify-content: center
+}
+
+.labelInscription {
+    display: flex;
+    flex-direction: column
+}
+
+.labelInscription label {
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 10px
+}
+
+.labelInscription textarea {
+    resize: vertical;
+    min-height: 23px;
+    overflow: hidden;
+    width: 100%
+}
+
+.labelInscription input, textarea {
+    display: block;
+    border: none;
+    width: 100%;
+    border-bottom: solid 1px;
+    border-image: linear-gradient(90deg,#7945f7,#ee8bf7) 1;
+    outline: 0;
+    padding-bottom: 5px
+}
+
+select {
+    background-color: #221f42;
+    border-image: linear-gradient(90deg,#7945f7,#ee8bf7) 1;
+    border-bottom: solid 1px;
+    outline: none;
+    color: #fff
+}
+
+.posBouton {
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+.posBouton2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    color: #808080;
+    padding: 20px
+}
+
+.boutonPublier {
+    background-color: #1E7FCB;
+    font-weight: 600;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 7px
+}
+
+.boutonPublier:hover {
+    background-color: #fff;
+    color: #1E7FCB
+}
+
+.boutonSupprimer {
+    background-color: #FF0000D0;
+    font-weight: 600;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 7px
+}
+
+.boutonSupprimer:hover {
+    background-color: #fff;
+    color: #FF0000D0
+}
+
+.boutonBlanc {
+    background-color: #fff;
+    font-weight: 600;
+    color: #1E7FCB;
+    border: none;
+    border-radius: 4px;
+    padding: 7px
+}
+
+.boutonBlanc:hover {
+    background-color: #1E7FCB;
+    color: #fff
+}
+
+.suppression {
+    display: flex;
+    padding: 7px
+}
+
+.suppression button {
+    margin: 1em;
+    padding: 15px;
+    font-weight: 600
+}
+
+.facture {
+    font-size: 13px
+}
+
+button:hover {
+    background-color: #1E7FCB;
+    color: #fff;
+    cursor: pointer
+}
+
+.groupes {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #fff;
+    flex-direction: column;
+    align-items: center
+}
+
+.groupes2 {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin: 10px 45px;
+    width: 95%;
+    color: #fff
+}
+
+.posBoutonsGroupes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap
+}
+
+.groupes2 form {
+    margin-left: 10px;
+    margin-right: 10px
+}
+
+.groupes3 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 10px 45px;
+    color: #fff
+}
+
+.groupeCouleur {
+    margin-bottom: 25px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, .24) 0 3px 8px;
+    background-color: #2a284d;
+    display: flex;
+    width: 82%;
+    flex-direction: column;
+    flex-wrap: nowrap
+}
+
+.groupeCouleur h2 {
+    text-align: center;
+    padding: 5px
+}
+
+.groupeCouleur img {
+    max-width: 100%
+}
+
+.profilsGroupes img {
+    margin-top: 5px;
+    border-radius: 25%
+}
+
+.titleIndex {
+    align-items: center;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    text-align: center
+}
+
+.titleIndex h1, .titleIndex h2 {
+    margin-bottom: 15px;
+    font-size: 2em
+}
+
+.titleIndex header h2 {
+    margin-bottom: 10px
+}
+
+.depense button, .depense h3 {
+    margin: 3px
+}
+
+.depense img, .membres3 img {
+    border-radius: 25%
+}
+
+.membres3 img {
+    margin-right: 10px
+}
+
+.posInvit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    width: 93%
+}
+
+.infosGroupes {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.infosGroupes h2 {
+    margin-top: 10px
+}
+
+.membres3 {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    padding: 10px;
+    margin-top: 20px;
+    background: linear-gradient(90deg,#7945f7,#ee8bf7);
+    color: #fff;
+    border-radius: 30px
+}
+
+.depense {
+    padding: 8px;
+    margin-top: 10px;
+    background: linear-gradient(90deg,#7945f7,#ee8bf7);
+    border-radius: 30px;
+    font-weight: 700;
+    width: 95%
+}
+
+.depense td {
+    padding: 5px;
+    text-align: center;
+    border: 1px dotted #fff
+}
+
+.membres2, .membres4 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start
+}
+
+.exception {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%
+}
+
+.exception a {
+    color: #808080
+}
+
+.navBarre {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(90deg,#7945f7,#ee8bf7);
+    height: 5px
+}
+
+*::-webkit-scrollbar  {
+    width: 8px;
+    background-color: rgba(16, 14, 45, .69)
+}
+
+*::-webkit-scrollbar-thumb  {
+    box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #7945f7
+}
+
+@media screen and (max-width: 1300px) {
+    footer {
+        font-size: 30px
+    }
+
+    .inscription {
+        display: flex;
+        text-align: center;
+        font-size: 50px
+    }
+
+    .inscription input, select, .labelInscription textarea {
+        border-image: linear-gradient(90deg,#7945f7,#ee8bf7) 1;
+        border-top: solid 3px;
+        border-bottom: solid 3px;
+        border-right: solid 3px;
+        border-left: solid 3px;
+        font-size: 50px;
+        margin: auto;
+        width: 80%
+    }
+
+    .search {
+        display: none
+    }
+
+    .inscription button {
+        font-size: 48px;
+        margin: 20px
+    }
+
+    input[type=radio] {
+        height: 1em;
+        width: 1em
+    }
+
+    .membres3 img {
+        width: 4em;
+        height: 4em
+    }
+}
