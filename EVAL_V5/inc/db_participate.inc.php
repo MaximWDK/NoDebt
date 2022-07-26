@@ -3,6 +3,7 @@ namespace Participate;
 
 require_once 'db_link.inc.php';
 use DB\DBLink;
+use PDO;
 
 class MyParticipate {
     public $uid;
@@ -12,7 +13,7 @@ class MyParticipate {
 
 class ParticipateRepository {
 
-    function checkIfExistsPr($uid, $gid) {
+    function checkIfExistsParticipate($uid, $gid) {
         try {
             $message = "";
             $pdo = DBLink::connect2db(MYDB, $message);
@@ -28,6 +29,24 @@ class ParticipateRepository {
             $message .= $e->getMessage() . '<br>';
         }
         DBLink::disconnect($pdo);
+        return $obj;
+    }
+
+    function getParticipeByUid($uid) {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->prepare("SELECT * FROM participer WHERE uid = :uid");
+            $stmt->bindValue(":uid", $uid);
+            if ($stmt->execute()){
+                $obj = $stmt->fetchAll(PDO::FETCH_CLASS, "Participate\MyParticipate");
+            } else {
+                $message .= "Erreur !";
+            }
+        } catch(Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($bdd);
         return $obj;
     }
 

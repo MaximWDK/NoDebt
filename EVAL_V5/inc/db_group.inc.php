@@ -30,6 +30,18 @@ class GroupRepository {
         return $obj;
     }
 
+    function getAllGroups() {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->query("SELECT * FROM groupe");
+        } catch (Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($pdo);
+        return $stmt;
+    }
+
     function getGroupById($gid) {
         try {
             $message = "";

@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
         if ($user) {
             $uid2 = $user->uid;
             $gid2 = '1';
-            $participate = $pr->checkIfExistsPr($uid2, $gid2);
+            $participate = $pr->checkIfExistsParticipate($uid2, $gid2);
         }
 
         if (!$user) {

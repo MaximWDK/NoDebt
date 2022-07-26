@@ -1,4 +1,4 @@
-<?php $statut='tout'; $nomPage='Accueil'; require 'inc/checkConnexion.php'; require 'inc/header.inc.php'?>
+<?php $statut='tout'; $nomPage='Accueil'; require 'inc/checkConnexion.php'; require 'php/index.inc.php'; require 'inc/header.inc.php'?>
 		<main>
 			<header class="posInvit">
 				<section class="titleIndex">
@@ -41,10 +41,14 @@
 				</header>
 			</section>
 			<section class="groupes">
-                <?php for ($i = 1; $i <= 5; $i++) {?>
+                <?php
+                while ($groupe = $groupes->fetch(PDO::FETCH_ASSOC)) {
+                    foreach ($participates as $participate) {
+                        if ($participate->uid == $_SESSION['uid'] && $groupe['gid'] == $participate->gid && $participate->estConfirme) {
+                            echo '
                     <section class="groupeCouleur">
                         <a href="groupe.php">
-                            <h2>Groupe public "Maxim"</h2>
+                            <h2>Groupe "' . $groupe['nom'] . '"</h2>
                         </a>
                         <section class="infosGroupes">
                             <img src="images/groupes.png" alt="image groupe" width="900px">
@@ -53,10 +57,11 @@
                                 <img src="images/profil_1.png" alt="profil" title="Maxim Léonet" width="70px" height="70px">
                             </section>
                             <h2>Participants:</h2>
-                            <section class="profilsGroupes">
-                            <?php for ($j = 1; $j <= 2; $j++) {?>
-                            <img src="images/profil_2.png" alt="profil" title="RB_NewPokeaS" width="70px" height="70px">
-                            <?php }?>
+                            <section class="profilsGroupes">';
+                            for ($j = 1; $j <= 2; $j++) { echo '
+                            <img src="images/profil_2.png" alt="profil" title="RB_NewPokeaS" width="70px" height="70px">';
+                            }
+                            echo '
                             </section>
                             <table class="depense">
                                 <thead>
@@ -126,12 +131,15 @@
                                 </tbody>
                             </table>
                             <h2>Dépenses totales: 1075€</h2>
-                            <form action="groupe.php" class="titleIndex">
-                                <button class="boutonPublier" type="submit">Consulter le groupe</button>
-                            </form>
+                            <a href="groupe.php?id=' . $groupe['gid'] . '" class="titleIndex">
+                                <button class="boutonPublier">Consulter le groupe</button>
+                            </a>
                         </section>
-                    </section>
-                <?php }?>
+                    </section>';
+                        }
+                    }
+                }
+                ?>
 			</section>
 		</main>
  <?php require 'inc/footer.inc.php'?>
