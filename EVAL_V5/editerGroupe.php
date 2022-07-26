@@ -1,4 +1,4 @@
-<?php $statut='tout'; $nomPage='Éditer Groupe'; require 'inc/checkConnexion.php'; require 'inc/header.inc.php'; require 'php/editerGroupe.inc.php' ?>
+<?php $statut='tout'; $nomPage='Éditer Groupe'; require 'inc/checkConnexion3.php'; require 'inc/header.inc.php'; require 'php/editerGroupe.inc.php' ?>
         <main>
             <?php if(isset($_SESSION['message'])) echo $_SESSION['message']?>
             <form class="inscription" method="post">

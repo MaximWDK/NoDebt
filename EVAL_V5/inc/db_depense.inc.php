@@ -15,12 +15,30 @@ class MyDepense {
 
 class DepenseRepository {
 
-    function checkDepense($did) {
+    function getDepenseByDid($did) {
         try {
             $message = "";
             $pdo = DBLink::connect2db(MYDB, $message);
             $stmt = $pdo->prepare("SELECT * FROM depense WHERE did = :did");
             $stmt->bindValue(":did", $did);
+            if ($stmt->execute()) {
+                $obj = $stmt->fetchObject("Depense\MyDepense");
+            } else {
+                $message .= "Erreur !";
+            }
+        } catch (Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($pdo);
+        return $obj;
+    }
+    
+    function getDepenseByGroupId($gid) {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->prepare("SELECT * FROM depense WHERE gid = :gid");
+            $stmt->bindValue(":gid", $gid);
             if ($stmt->execute()) {
                 $obj = $stmt->fetchObject("Depense\MyDepense");
             } else {

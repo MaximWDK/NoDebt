@@ -33,6 +33,24 @@ class UserRepository {
         return $obj;
     }
 
+    function getUserById($uid) {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->prepare("SELECT * FROM users where uid = :uid");
+            $stmt->bindValue(":uid", $uid);
+            if ($stmt->execute()) {
+                $obj = $stmt->fetchObject("User\MyUser");
+            } else {
+                $message .= "Erreur !";
+            }
+        } catch (Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($pdo);
+        return $obj;
+    }
+
     function addUser($courriel, $nom, $prenom, $motPasse) {
             $pdo = DBLink::connect2db(MYDB, $message);
             $stmt = $pdo->prepare("INSERT INTO users (courriel, nom, prenom, motPasse, estActif) VALUES (:courriel,:nom,:prenom,:motPasse,'1')");

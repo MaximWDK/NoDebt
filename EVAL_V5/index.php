@@ -131,7 +131,7 @@
                                 </tbody>
                             </table>
                             <h2>Dépenses totales: 1075€</h2>
-                            <a href="groupe.php?id=' . $groupe['gid'] . '" class="titleIndex">
+                            <a href="groupe.php?gid=' . $groupe['gid'] . '" class="titleIndex">
                                 <button class="boutonPublier">Consulter le groupe</button>
                             </a>
                         </section>

@@ -12,5 +12,5 @@ $gr = new GroupRepository();
 $_SESSION['message'] = "";
 
 $groupes = $gr->getAllGroups();
-$participates = $pr->getParticipeByUid($_SESSION['uid']);
+$participates = $pr->getParticipateByUid($_SESSION['uid']);
 ?>

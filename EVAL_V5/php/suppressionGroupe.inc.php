@@ -1,20 +1,9 @@
 <?php
-require 'inc/db_participate.inc.php';
-require 'inc/db_group.inc.php';
-
-use Group\GroupRepository;
-use Participate\ParticipateRepository;
-
-$pr = new ParticipateRepository();
-$gr = new GroupRepository();
-$_SESSION['message'] = "";
-
 if (isset($_POST['noSubmit'])) {
-    header('Location:groupe.php');
+    header('Location:groupe.php?gid=' . $gid);
 }
 
 if (isset($_POST['submit'])) {
-    $gid = '1';
     $groupe = $gr->getGroupById($gid);
 
     if (!$groupe) {

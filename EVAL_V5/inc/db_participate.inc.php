@@ -32,7 +32,26 @@ class ParticipateRepository {
         return $obj;
     }
 
-    function getParticipeByUid($uid) {
+    function getParticipateByUidAndGid($uid, $gid) {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->prepare("SELECT * FROM participer WHERE uid = :uid AND gid = :gid");
+            $stmt->bindValue(":uid", $uid);
+            $stmt->bindValue(":gid", $gid);
+            if ($stmt->execute()) {
+                $obj = $stmt->fetchObject("Participate\MyParticipate");
+            } else {
+                $message .= "Erreur !";
+            }
+        } catch (Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($pdo);
+        return $obj;
+    }
+
+    function getParticipateByUid($uid) {
         try {
             $message = "";
             $pdo = DBLink::connect2db(MYDB, $message);

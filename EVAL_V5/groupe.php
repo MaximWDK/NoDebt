@@ -1,23 +1,24 @@
-<?php $statut='tout'; $nomPage='Groupe'; require 'inc/checkConnexion.php'; require 'inc/header.inc.php'?>
+<?php $statut='tout'; $nomPage='Groupe'; require_once 'inc/checkConnexion3.php'; require 'inc/header.inc.php'?>
         <main>
             <header class="titleIndex">
                 <h1>Groupe de Maxim Léonet</h1>
             </header>
             <section class="groupes">
+                <?php echo '
                 <section class="groupeCouleur">
                     <section class="exception">
                         <section class="groupes2">
                             <h2>Dépenses par membre</h2>
                             <section class="posBoutonsGroupes">
-                                <form action="invitation.php">
+                                <a href="invitation.php?gid=' . $gid . '" class="titleIndex">
                                     <button class="boutonPublier" type="submit">Ajouter un membre</button>
-                                </form>
-                                <form action="editerGroupe.php">
+                                </a>
+                                <a href="editerGroupe.php?gid=' . $gid . '" class="titleIndex">
                                     <button class="boutonPublier" type="submit">Modifier le groupe</button>
-                                </form>
-                                <form action="suppressionGroupe.php">
+                                </a>
+                                <a href="suppressionGroupe.php?gid=' . $gid . '" class="titleIndex">
                                     <button class="boutonSupprimer" type="submit">Supprimer le groupe</button>
-                                </form>
+                                </a>
                             </section>
                         </section>
                         <table class="depense">
@@ -177,7 +178,7 @@
                                         </section>
                                     </td>
                                     <td>10/11/2021</td>
-                                    <td>Saut à l'élastique (200€)</td>
+                                    <td>Saut en parachute (200€)</td>
                                     <td>Tags: Saut, Élastique, Maxim</td>
                                     <td>
                                         <section>
@@ -189,11 +190,13 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <form action="ajouterDepense.php" class="titleIndex">
+                        <a href="ajouterDepense.php?gid=' . $gid . '" class="titleIndex">
                             <button class="boutonPublier" type="submit">Ajouter une dépense</button>
-                        </form>
+                        </a>
                     </section>
-                </section>
+                </section>';
+                ?>
+                
             </section>
         </main>
 <?php require 'inc/footer.inc.php'?>

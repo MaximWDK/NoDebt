@@ -10,7 +10,7 @@ if (isset($_POST['noSubmit'])) {
 
 if (isset($_POST['submit'])) {
     $did = '1';
-    $depense = $dr->checkDepense($did);
+    $depense = $dr->getDepenseByDid($did);
 
     if(!$depense) {
         $_SESSION['message'] = "<h1>Cette dépense a déjà été supprimée !</h1>";

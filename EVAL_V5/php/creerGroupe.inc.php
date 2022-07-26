@@ -14,15 +14,18 @@ if (isset($_POST['submit'])) {
         $devise = trim($_POST['devise']);
         $uid = $_SESSION['uid'];
 
-        $gr->addGroup($nom, $devise, $uid);
-        $groupe = $gr->getGroup($nom);
-        $gid2 = $groupe->gid;
-        $nom2 = $groupe->nom;
-        $uid2 = $groupe->uid;
-        $estConfirme = '1';
-
-        $pr->addParticipate($uid2, $gid2, $estConfirme);
-
+        $existGroup = $gr->getGroup($nom);
+        if ($existGroup) {
+            $_SESSION['message'] = "<h1>Ce nom de groupe existe déjà !</h1>";
+        } else {
+            $gr->addGroup($nom, $devise, $uid);
+            $groupe = $gr->getGroup($nom);
+            $gid2 = $groupe->gid;
+            $nom2 = $groupe->nom;
+            $uid2 = $groupe->uid;
+            $estConfirme = '1';
+            $pr->addParticipate($uid2, $gid2, $estConfirme);
+        }
     }
 }
 ?>

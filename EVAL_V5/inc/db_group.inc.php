@@ -12,6 +12,7 @@ class MyGroup {
 }
 
 class GroupRepository {
+
     function getGroup($nom) {
         try {
             $message = "";
