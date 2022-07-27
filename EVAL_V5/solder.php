@@ -1,4 +1,4 @@
-<?php ob_start(); $statut='tout'; $nomPage='Confirmation Solde'; require 'inc/checkConnexion.php'; require 'inc/header.inc.php'?>
+<?php ob_start(); $statut='tout'; $nomPage='Confirmation Solde'; require 'inc/checkConnexion3.php'; require 'inc/header.inc.php'?>
         <main>
             <section class="inscription">
                 <header>

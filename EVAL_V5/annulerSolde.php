@@ -1,4 +1,4 @@
-<?php $statut='tout'; $nomPage='Annuler Solde'; require 'inc/checkConnexion.php'; require 'inc/header.inc.php'?>
+<?php $statut='tout'; $nomPage='Annuler Solde'; require 'inc/checkConnexion3.php'; require 'inc/header.inc.php'?>
         <main>
             <section class="inscription">
                 <header>

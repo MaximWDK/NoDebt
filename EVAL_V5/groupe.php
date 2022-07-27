@@ -77,18 +77,18 @@
                                     <i class="material-icons">search</i>
                                 </button>
                             </form>
-                            <form action="rechercheAvancee.php">
+                            <a href="rechercheAvancee.php?gid=' . $gid . '">
                                 <button class="boutonPublier" type="submit">Recherche Avancée</button>
-                            </form>
-                            <form action="versements.php">
+                            </a>
+                            <a href="versements.php?gid=' . $gid . '">
                                 <button class="boutonPublier" type="submit">Liste des versements</button>
-                            </form>
-                            <form action="solder.php">
+                            </a>
+                            <a href="solder.php?gid=' . $gid . '">
                                 <button class="boutonPublier" type="submit">Solder le groupe</button>
-                            </form>
-                            <form action="annulerSolde.php">
+                            </a>
+                            <a href="annulerSolde.php?gid=' . $gid . '">
                                 <button class="boutonSupprimer" type="submit">Annuler le solde</button>
-                            </form>
+                            </a>
                         </section>
                         <table class="depense">
                             <thead>

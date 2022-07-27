@@ -1,4 +1,4 @@
-<?php $statut='tout'; $nomPage='Recherche Avancée'; require 'inc/checkConnexion.php'; require 'inc/header.inc.php'?>
+<?php $statut='tout'; $nomPage='Recherche Avancée'; require 'inc/checkConnexion3.php'; require 'inc/header.inc.php'?>
         <main>
             <form action="depense.php" class="inscription" method="post">
                 <section class="labelInscription">
