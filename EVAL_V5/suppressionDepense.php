@@ -1,4 +1,4 @@
-<?php $statut='tout'; $nomPage='Suppression Dépense Groupe'; require 'inc/checkConnexion.php'; require 'inc/header.inc.php'; require 'php/suppressionDepense.inc.php'?>
+<?php ob_start(); $statut='tout'; $nomPage='Suppression Dépense Groupe'; require 'inc/checkConnexion.php'; require 'inc/header.inc.php'; require 'php/suppressionDepense.inc.php'?>
         <main>
             <section class="inscription">
                 <?php if(isset($_SESSION['message'])) echo $_SESSION['message']?>

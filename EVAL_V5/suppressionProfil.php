@@ -1,4 +1,4 @@
-<?php require 'php/suppressionProfil.inc.php'; require 'inc/header.inc.php'?>
+<?php ob_start(); require 'php/suppressionProfil.inc.php'; require 'inc/header.inc.php'?>
         <main>
             <section class="inscription">
                 <header>

@@ -1,4 +1,4 @@
-<?php $statut='tout'; $nomPage='Suppression Groupe'; require 'inc/checkConnexion4.php'; require 'inc/header.inc.php'; require 'php/accepterInvitation.inc.php'?>
+<?php ob_start(); $statut='tout'; $nomPage='Suppression Groupe'; require 'inc/checkConnexion4.php'; require 'inc/header.inc.php'; require 'php/accepterInvitation.inc.php'?>
         <main>
             <section class="inscription">
                 <?php if(isset($_SESSION['message'])) echo $_SESSION['message']?>
