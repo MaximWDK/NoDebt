@@ -19,6 +19,9 @@
                                 <a href="suppressionGroupe.php?gid=' . $gid . '" class="titleIndex">
                                     <button class="boutonSupprimer" type="submit">Supprimer le groupe</button>
                                 </a>
+                                <a href="quitterGroupe.php?gid=' . $gid . '" class="titleIndex">
+                                    <button class="boutonSupprimer" type="submit">Quitter le groupe</button>
+                                </a>
                             </section>
                         </section>
                         <table class="depense">

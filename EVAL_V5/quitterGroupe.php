@@ -1,0 +1,16 @@
+<?php $statut='tout'; $nomPage='Suppression Groupe'; require 'inc/checkConnexion3.php'; require 'inc/header.inc.php'; require 'php/quitterGroupe.inc.php'?>
+        <main>
+            <section class="inscription">
+                <?php if(isset($_SESSION['message'])) echo $_SESSION['message']?>
+                <header>
+                    <h1>Voulez-vous vraiment quitter ce groupe ?</h1>
+                </header>
+                <section class="suppression">
+                    <form method="post">
+                        <button class="boutonSupprimer" name="submit" id="supprimer" type="submit">Quitter</button>
+                        <button class="boutonPublier" name="noSubmit" id="garder" type="submit">Annuler</button>
+                    </form>
+                </section>
+            </section>
+        </main>
+<?php require 'inc/footer.inc.php'?>

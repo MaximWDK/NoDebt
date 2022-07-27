@@ -78,7 +78,35 @@ class ParticipateRepository {
         DBLink::disconnect($pdo);
     }
 
-    function removeParticipate($gid, $uid) {
+    function confirmParticipate($uid, $gid) {
+        $pdo = DBLink::connect2db(MYDB, $message);
+        $stmt = $pdo->prepare("UPDATE participer SET estConfirme = 1 WHERE uid = :uid AND gid = :gid");
+        if (!$stmt->execute(array(":uid" => $uid, ":gid" => $gid))) {
+            $_SESSION['message'] = "<h1>Erreur !</h1>";
+        }
+        DBLink::disconnect($pdo);
+    }
+
+    function getParticipateByGid($gid, $uid) {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->prepare("SELECT * FROM participer WHERE gid = :gid AND uid != :uid");
+            $stmt->bindValue(":gid", $gid);
+            $stmt->bindParam(':uid', $uid);
+            if ($stmt->execute()) {
+                $obj = $stmt->fetchAll(PDO::FETCH_CLASS, "Participate\MyParticipate");
+            } else {
+                $message .= "Erreur !";
+            }
+        } catch (Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($pdo);
+        return $obj;
+    }
+
+    function removeParticipate($uid, $gid) {
         $pdo = DBLink::connect2db(MYDB, $message);
         $stmt = $pdo->prepare("DELETE FROM participer where gid = :gid AND uid = :uid");
         $stmt->bindParam(':gid', $gid);
