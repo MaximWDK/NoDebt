@@ -35,11 +35,27 @@ function displayGroups() {
                             <h2>Participants:</h2>
                             <section class="profilsGroupes">';
                 foreach ($participantsGroupe as $participantGroupe) {
-                    $newParticipant = $ur->getUserById($participantGroupe->uid);
-                    if (isset($newParticipant->pdp) && $newParticipant->pdp == 1) {
-                        echo '<img src="images/profil_' . $newParticipant->uid . '.png" alt="profil" title="' . $newParticipant->prenom . ' ' . $newParticipant->nom . '" width="70px" height="70px">';
-                    } else {
-                        echo '<img src="images/profil_default.png" alt="profil" title="' . $newParticipant->prenom . ' ' . $newParticipant->nom . '" width="70px" height="70px">';
+                    if ($participantGroupe->estConfirme == 1) {
+                        $newParticipant = $ur->getUserById($participantGroupe->uid);
+                        if (isset($newParticipant->pdp) && $newParticipant->pdp == 1) {
+                            echo '<img src="images/profil_' . $newParticipant->uid . '.png" alt="profil" title="' . $newParticipant->prenom . ' ' . $newParticipant->nom . '" width="70px" height="70px">';
+                        } else {
+                            echo '<img src="images/profil_default.png" alt="profil" title="' . $newParticipant->prenom . ' ' . $newParticipant->nom . '" width="70px" height="70px">';
+                        }
+                    }
+                }
+                echo '
+                            </section>
+                            <h2>Participants invités (en attente d\'acceptation):</h2>
+                            <section class="profilsGroupes">';
+                foreach ($participantsGroupe as $participantGroupe) {
+                    if ($participantGroupe->estConfirme == 0) {
+                        $newParticipant = $ur->getUserById($participantGroupe->uid);
+                        if (isset($newParticipant->pdp) && $newParticipant->pdp == 1) {
+                            echo '<img src="images/profil_' . $newParticipant->uid . '.png" alt="profil" title="' . $newParticipant->prenom . ' ' . $newParticipant->nom . '" width="70px" height="70px">';
+                        } else {
+                            echo '<img src="images/profil_default.png" alt="profil" title="' . $newParticipant->prenom . ' ' . $newParticipant->nom . '" width="70px" height="70px">';
+                        }
                     }
                 }
                 echo '
