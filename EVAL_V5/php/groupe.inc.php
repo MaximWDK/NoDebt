@@ -5,8 +5,8 @@ require 'inc/db_participate.inc.php';
 require 'inc/db_depense.inc.php';
 
 use User\UserRepository;
-use Group\GroupRepository;
 use Participate\ParticipateRepository;
+use Group\GroupRepository;
 use Depense\DepenseRepository;
 
 function displayGroup() {
