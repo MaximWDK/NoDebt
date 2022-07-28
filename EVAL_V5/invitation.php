@@ -3,7 +3,7 @@
             <?php if(isset($_SESSION['message'])) echo $_SESSION['message']?>
             <form class="inscription" method="post">
                 <section class="labelInscription">
-                    <h1>Inviter un membre dans le groupe public "Maxim"</h1>
+                    <h1>Inviter un membre dans le groupe "<?php echo $groupe->nom ?>"</h1>
                     <label for="courriel">Entrez l'adresse email de la personne à inviter</label>
                     <input id="courriel" name="courriel" type="email" autofocus required placeholder="Le courriel">
                 </section>

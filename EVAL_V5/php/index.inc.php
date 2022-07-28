@@ -18,7 +18,7 @@ function displayGroups() {
         foreach ($participates as $participate) {
             if ($participate->uid == $_SESSION['uid'] && $groupe['gid'] == $participate->gid && $participate->estConfirme) {
                 $createur = $ur->getUserById($groupe['uid']);
-                $participantsGroupe = $pr->getParticipateByGid($groupe['gid'], $groupe['uid']);
+                $participantsGroupe = $pr->getParticipateByGidAndUidClass($groupe['gid'], $groupe['uid']);
                 echo '
                     <section class="groupeCouleur">
                         <a href="groupe.php?gid=' . $groupe['gid'] . '">

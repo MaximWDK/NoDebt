@@ -22,6 +22,7 @@ $_SESSION['message'] = "";
 $uid = $_SESSION['uid'];
 $gid = $_GET['gid'];
 $participe = $pr->getParticipateByUidAndGid($uid, $gid);
+$groupe = $gr->getGroupById($gid);
 
 if ($participe->uid == $_SESSION['uid'] && $gid == $participe->gid && $participe->estConfirme == 1) {
     $_SESSION['message'] = "";

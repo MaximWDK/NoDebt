@@ -3,7 +3,7 @@
             <section class="inscription">
                 <?php if(isset($_SESSION['message'])) echo $_SESSION['message']?>
                 <header>
-                    <h1>Voulez-vous vraiment supprimer ce groupe ?</h1>
+                    <h1>Voulez-vous vraiment supprimer le groupe "<?php echo $groupe->nom ?>" ?</h1>
                 </header>
                 <section class="suppression">
                     <form method="post">

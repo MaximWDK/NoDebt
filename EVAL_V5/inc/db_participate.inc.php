@@ -51,6 +51,43 @@ class ParticipateRepository {
         return $obj;
     }
 
+    function getParticipateByGid($gid) {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->prepare("SELECT * FROM participer WHERE gid = :gid");
+            $stmt->bindValue(":gid", $gid);
+            if ($stmt->execute()) {
+                $obj = $stmt->fetchAll(PDO::FETCH_CLASS, "Participate\MyParticipate");
+            } else {
+                $message .= "Erreur !";
+            }
+        } catch (Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($pdo);
+        return $obj;
+    }
+
+    function getParticipateByGidAndUidClass($gid, $uid) {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->prepare("SELECT * FROM participer WHERE gid = :gid AND uid != :uid");
+            $stmt->bindValue(":gid", $gid);
+            $stmt->bindParam(':uid', $uid);
+            if ($stmt->execute()) {
+                $obj = $stmt->fetchAll(PDO::FETCH_CLASS, "Participate\MyParticipate");
+            } else {
+                $message .= "Erreur !";
+            }
+        } catch (Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($pdo);
+        return $obj;
+    }
+
     function getParticipateByUid($uid) {
         try {
             $message = "";
@@ -66,6 +103,24 @@ class ParticipateRepository {
             $message .= $e->getMessage() . '<br>';
         }
         DBLink::disconnect($bdd);
+        return $obj;
+    }
+
+    function getParticipateByGidConfirmed($gid) {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->prepare("SELECT * FROM participer WHERE gid = :gid AND estConfirme = 1");
+            $stmt->bindValue(":gid", $gid);
+            if ($stmt->execute()) {
+                $obj = $stmt->fetchAll(PDO::FETCH_CLASS, "Participate\MyParticipate");
+            } else {
+                $message .= "Erreur !";
+            }
+        } catch (Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($pdo);
         return $obj;
     }
 
@@ -85,25 +140,6 @@ class ParticipateRepository {
             $_SESSION['message'] = "<h1>Erreur !</h1>";
         }
         DBLink::disconnect($pdo);
-    }
-
-    function getParticipateByGid($gid, $uid) {
-        try {
-            $message = "";
-            $pdo = DBLink::connect2db(MYDB, $message);
-            $stmt = $pdo->prepare("SELECT * FROM participer WHERE gid = :gid AND uid != :uid");
-            $stmt->bindValue(":gid", $gid);
-            $stmt->bindParam(':uid', $uid);
-            if ($stmt->execute()) {
-                $obj = $stmt->fetchAll(PDO::FETCH_CLASS, "Participate\MyParticipate");
-            } else {
-                $message .= "Erreur !";
-            }
-        } catch (Exception $e) {
-            $message .= $e->getMessage() . '<br>';
-        }
-        DBLink::disconnect($pdo);
-        return $obj;
     }
 
     function removeParticipate($uid, $gid) {

@@ -2,7 +2,7 @@
         <main>
             <section class="inscription">
                 <header>
-                    <h1>Voulez-vous vraiment annuler le solde du groupe ?</h1>
+                    <h1>Voulez-vous vraiment annuler le solde du groupe "<?php echo $groupe->nom ?>" ?</h1>
                 </header>
                 <section class="suppression">
                     <form action="groupe.php">

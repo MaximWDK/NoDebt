@@ -2,7 +2,7 @@
         <main>
             <section class="inscription">
                 <header>
-                    <h1>Voulez-vous vraiment solder ce groupe ?</h1>
+                    <h1>Voulez-vous vraiment solder le groupe "<?php echo $groupe->nom ?>" ?</h1>
                     <section class="membres3">
                         <section class="membres4">
                             <img src="images/profil_1.png" alt="image profil" width="80" height="80">

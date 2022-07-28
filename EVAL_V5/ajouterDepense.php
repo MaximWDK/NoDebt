@@ -7,7 +7,7 @@
                     <label for="dateHeure">Date*</label>
                     <input id="dateHeure" name="dateHeure" type="datetime-local" min="2016-06-07T00:00" autofocus required>
                     <label for="montant">Montant*</label>
-                    <input id="montant" name="montant" type="number" required placeholder="Montant">
+                    <input id="montant" name="montant" step="0.01" type="number" required placeholder="Montant">
                     <label for="nom">Libellé*</label>
                     <input id="nom" name="libelle" type="text" required placeholder="Libellé">
                     <label>Scan - Facture</label>

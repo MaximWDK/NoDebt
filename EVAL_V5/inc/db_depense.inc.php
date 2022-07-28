@@ -3,6 +3,7 @@ namespace Depense;
 
 require_once 'db_link.inc.php';
 use DB\DBLink;
+use PDO;
 
 class MyDepense {
     public $did;
@@ -84,6 +85,43 @@ class DepenseRepository {
             $_SESSION['message'] = "<h1>Erreur !</h1>";
         }
         DBLink::disconnect($pdo);
+    }
+
+    function getTotalDepenseByUidAndGig($uid, $gid) {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->prepare("SELECT SUM(montant) as total FROM depense WHERE uid = :uid AND gid = :gid");
+            $stmt->bindValue(":uid", $uid);
+            $stmt->bindValue(":gid", $gid);
+            if ($stmt->execute()) {
+                $obj = $stmt->fetch(PDO::FETCH_NUM);
+            } else {
+                $message .= "Erreur !";
+            }
+        } catch (Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($pdo);
+        return $obj[0];
+    }
+
+    function getTotalDepenseByGid($gid) {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->prepare("SELECT SUM(montant) as total FROM depense WHERE gid = :gid");
+            $stmt->bindValue(":gid", $gid);
+            if ($stmt->execute()) {
+                $obj = $stmt->fetch(PDO::FETCH_NUM);
+            } else {
+                $message .= "Erreur !";
+            }
+        } catch (Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($pdo);
+        return $obj[0];
     }
 }
 ?>

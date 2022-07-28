@@ -3,7 +3,7 @@
             <?php if(isset($_SESSION['message'])) echo $_SESSION['message']?>
             <form class="inscription" method="post">
                 <section class="labelInscription">
-                    <h1>MODIFIER LE GROUPE</h1>
+                    <h1>MODIFIER LE GROUPE "<?php echo $groupe->nom ?>"</h1>
                     <label for="nom">Nom*</label>
                     <input id="nom" name="nom" type="text" autofocus required placeholder="Le nom du groupe">
                     <label for="devise">Devise*</label>
