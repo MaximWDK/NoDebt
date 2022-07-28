@@ -1,17 +1,20 @@
 <?php
 require 'inc/db_user.inc.php';
-require 'inc/db_participate.inc.php';
 require 'inc/db_group.inc.php';
+require 'inc/db_participate.inc.php';
+require 'inc/db_depense.inc.php';
 
 use User\UserRepository;
 use Participate\ParticipateRepository;
 use Group\GroupRepository;
+use Depense\DepenseRepository;
 $_SESSION['message'] = "";
 
 function displayGroups() {
     $ur = new UserRepository();
     $pr = new ParticipateRepository();
     $gr = new GroupRepository();
+    $dr = new DepenseRepository();
     $groupes = $gr->getAllGroups();
     $participates = $pr->getParticipateByUid($_SESSION['uid']);
     while ($groupe = $groupes->fetch(PDO::FETCH_ASSOC)) {
@@ -32,7 +35,7 @@ function displayGroups() {
                             <section class="profilsGroupes">
                                 <img src="images/profil_' . $groupe['uid'] . '.png" alt="profil" title="' . $createur->prenom . ' ' . $createur->nom . '" width="70px" height="70px">
                             </section>
-                            <h2>Participants:</h2>
+                            <h2>Participants confirmés:</h2>
                             <section class="profilsGroupes">';
                 foreach ($participantsGroupe as $participantGroupe) {
                     if ($participantGroupe->estConfirme == 1) {
@@ -46,7 +49,7 @@ function displayGroups() {
                 }
                 echo '
                             </section>
-                            <h2>Participants invités (en attente d\'acceptation):</h2>
+                            <h2>Participants invités:</h2>
                             <section class="profilsGroupes">';
                 foreach ($participantsGroupe as $participantGroupe) {
                     if ($participantGroupe->estConfirme == 0) {
@@ -127,7 +130,11 @@ function displayGroups() {
                                 </tr>
                                 </tbody>
                             </table>
-                            <h2>Dépenses totales: 1075€</h2>
+                            ';
+                            $devise = $gr->getGroupById($groupe['gid'])->devise;
+                            $depensesTotalParGroupe = $dr->getTotalDepenseByGid($groupe['gid']);
+                            echo '
+                            <h2>Dépenses totales: '.round($depensesTotalParGroupe, 2) . $devise . '</h2>
                             <a href="groupe.php?gid=' . $groupe['gid'] . '" class="titleIndex">
                                 <button class="boutonPublier">Consulter le groupe</button>
                             </a>
