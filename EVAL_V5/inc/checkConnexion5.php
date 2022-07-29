@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['courriel'])) {
-header('Location: connexion.php');
+    header('Location: connexion.php');
 }
 require 'inc/db_user.inc.php';
 require 'inc/db_group.inc.php';
@@ -26,10 +26,16 @@ $cr = new CaracteriserRepository();
 
 $_SESSION['message'] = "";
 $uid = $_SESSION['uid'];
-$gid = $_GET['gid'];
+$did = $_GET['did'];
+$depense = $dr->getDepenseByDid($did);
+$gid = $depense->gid;
 $participe = $pr->getParticipateByUidAndGid($uid, $gid);
+$newParticipant = $ur->getUserById($uid);
+$devise = $gr->getGroupById($gid)->devise;
+$newCaracteriser = $cr->getCaracteriserByDid($did);
+$newTag = $tr->getTagByTid($newCaracteriser->tid);
 
-if ($participe->uid == $_SESSION['uid'] && $gid == $participe->gid && $participe->estConfirme == 0) {
+if ($participe->uid == $_SESSION['uid'] && $gid == $participe->gid && $participe->estConfirme == 1) {
     $_SESSION['message'] = "";
 } else {
     header("Location: index.php");

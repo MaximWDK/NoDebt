@@ -33,15 +33,15 @@ class DepenseRepository {
         DBLink::disconnect($pdo);
         return $obj;
     }
-    
-    function getDepenseByGroupId($gid) {
+
+    function getDepenseByGid($gid) {
         try {
             $message = "";
             $pdo = DBLink::connect2db(MYDB, $message);
-            $stmt = $pdo->prepare("SELECT * FROM depense WHERE gid = :gid");
+            $stmt = $pdo->prepare("SELECT * FROM depense WHERE gid = :gid order by dateHeure desc");
             $stmt->bindValue(":gid", $gid);
             if ($stmt->execute()) {
-                $obj = $stmt->fetchObject("Depense\MyDepense");
+                $obj = $stmt->fetchAll(PDO::FETCH_CLASS, "Depense\MyDepense");
             } else {
                 $message .= "Erreur !";
             }
@@ -58,12 +58,12 @@ class DepenseRepository {
         if (!$stmt->execute(array(":dateHeure" => $dateHeure, ":montant" => $montant, ":libelle" => $libelle, ":uid" => $uid, ":gid" => $gid))) {
             $_SESSION['message'] = "<h1>Erreur !</h1>";
         } else {
-            $_SESSION['message'] = "<h1>Dépense a été ajoutée avec succès !</h1>";
+            $_SESSION['message'] = "<h1>Votre dépense a été ajoutée avec succès !</h1>";
         }
         DBLink::disconnect($pdo);
     }
 
-    function removeDepense($did)
+    function removeDepenseByDid($did)
     {
         $pdo = DBLink::connect2db(MYDB, $message);
         $stmt = $pdo->prepare("DELETE FROM depense where did = :did");
@@ -71,7 +71,7 @@ class DepenseRepository {
         if(!$stmt->execute()) {
             $_SESSION['message'] = "<h1>Erreur !</h1>";
         } else {
-            $_SESSION['message'] = "<h1>Dépense supprimée avec succès !</h1>";
+            $_SESSION['message'] = "<h1>Votre dépense a été supprimée avec succès !</h1>";
         }
         DBLink::disconnect($pdo);
     }
@@ -122,6 +122,28 @@ class DepenseRepository {
         }
         DBLink::disconnect($pdo);
         return $obj[0];
+    }
+
+    function getDepenseByAll($dateHeure, $montant, $libelle, $uid, $gid) {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->prepare("SELECT * FROM depense WHERE dateHeure = :dateHeure AND montant = :montant AND libelle = :libelle AND uid = :uid AND gid = :gid");
+            $stmt->bindValue(":dateHeure", $dateHeure);
+            $stmt->bindValue(":montant", $montant);
+            $stmt->bindValue(":libelle", $libelle);
+            $stmt->bindValue(":uid", $uid);
+            $stmt->bindValue(":gid", $gid);
+            if ($stmt->execute()) {
+                $obj = $stmt->fetchObject("Depense\MyDepense");
+            } else {
+                $message .= "Erreur !";
+            }
+        } catch (Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($pdo);
+        return $obj;
     }
 }
 ?>

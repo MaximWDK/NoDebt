@@ -10,6 +10,8 @@
                     <input id="montant" name="montant" step="0.01" type="number" required placeholder="Montant">
                     <label for="nom">Libellé*</label>
                     <input id="nom" name="libelle" type="text" required placeholder="Libellé">
+                    <label for="tag">Tag*</label>
+                    <input id="tag" name="tag" type="text" required placeholder="Tag">
                     <label>Scan - Facture</label>
                     <input id="facture" name="facture" type="file" accept=".png, .jpg, .pdf">
                 </section>

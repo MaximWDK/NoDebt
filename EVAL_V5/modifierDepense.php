@@ -1,4 +1,4 @@
-<?php $statut='tout'; $nomPage='Modifier Dépense'; require 'inc/checkConnexion.php'; require 'inc/header.inc.php'; require 'php/modifierDepense.inc.php' ?>
+<?php $statut='tout'; $nomPage='Modifier Dépense'; require 'inc/checkConnexion5.php'; require 'php/modifierDepense.inc.php'; require 'inc/header.inc.php'?>
         <main>
             <?php if(isset($_SESSION['message'])) echo $_SESSION['message']?>
             <form class="inscription" method="post">
@@ -7,9 +7,11 @@
                     <label for="dateHeure">Date*</label>
                     <input id="dateHeure" name="dateHeure" type="datetime-local" min="2016-06-07T00:00" autofocus required>
                     <label for="montant">Montant*</label>
-                    <input id="montant" name="montant" type="number" required placeholder="Montant">
+                    <input id="montant" name="montant" step="0.01" type="number" required placeholder="Montant">
                     <label for="nom">Libellé*</label>
                     <input id="nom" name="libelle" type="text" required placeholder="Libellé">
+                    <label for="tag">Tag*</label>
+                    <input id="tag" name="tag" type="text" required placeholder="Tag">
                     <label>Scan - Facture</label>
                     <input id="facture" name="facture" type="file" accept=".png, .jpg, .pdf">
                 </section>

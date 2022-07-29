@@ -3,18 +3,25 @@ require 'inc/db_user.inc.php';
 require 'inc/db_group.inc.php';
 require 'inc/db_participate.inc.php';
 require 'inc/db_depense.inc.php';
+require 'inc/db_tag.inc.php';
+require 'inc/db_caracteriser.inc.php';
 
 use User\UserRepository;
 use Participate\ParticipateRepository;
 use Group\GroupRepository;
 use Depense\DepenseRepository;
-$_SESSION['message'] = "";
+use Tag\TagRepository;
+use Caracteriser\CaracteriserRepository;
 
 function displayGroups() {
     $ur = new UserRepository();
-    $pr = new ParticipateRepository();
     $gr = new GroupRepository();
+    $pr = new ParticipateRepository();
     $dr = new DepenseRepository();
+    $tr = new TagRepository();
+    $cr = new CaracteriserRepository();
+
+    $_SESSION['message'] = "";
     $groupes = $gr->getAllGroups();
     $participates = $pr->getParticipateByUid($_SESSION['uid']);
     while ($groupe = $groupes->fetch(PDO::FETCH_ASSOC)) {
@@ -64,77 +71,59 @@ function displayGroups() {
                 echo '
                             </section>
                             <table class="depense">
-                                <thead>
+                            <thead>
                                 <tr>
                                     <th>Utilisateur</th>
-                                    <th>Date</th>
+                                    <th>Date - heure</th>
                                     <th>Achat + Prix</th>
-                                    <th>Tags</th>
-                                    <th>Voir Dépense</th>
+                                    <th>Tag</th>
+                                    <th></th>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <section class="membres2">
-                                            <img src="images/profil_3.png" alt="image profil" width="80px" height="80px">
-                                            <h3>Slyway</h3>
-                                        </section>
-                                    </td>
-                                    <td>23/10/2021</td>
-                                    <td>KFC (35€)</td>
-                                    <td>Kfc, Resto, Slyway</td>
-                                    <td>
-                                        <section>
-                                            <form action="depense.php">
-                                                <button class="boutonBlanc" type="submit">Voir la dépense</button>
-                                            </form>
-                                        </section>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <section class="membres2">
-                                            <img src="images/profil_1.png" alt="image profil" width="80px" height="80px">
-                                            <h3>Maxim Léonet</h3>
-                                        </section>
-                                    </td>
-                                    <td>27/10/2021</td>
-                                    <td>3 planches de surf (600€)</td>
-                                    <td>Surf, Planches, Maxim</td>
-                                    <td>
-                                        <section>
-                                            <form action="depense.php">
-                                                <button class="boutonBlanc" type="submit">Voir la dépense</button>
-                                            </form>
-                                        </section>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <section class="membres2">
-                                            <img src="images/profil_2.png" alt="image profil" width="80px" height="80px">
-                                            <h3>Rb_NewPokeaS</h3>
-                                        </section>
-                                    </td>
-                                    <td>02/11/2021</td>
-                                    <td>2 vestes (150€)</td>
-                                    <td>Vestes, Vêtements, RB</td>
-                                    <td>
-                                        <section>
-                                            <form action="depense.php">
-                                                <button class="boutonBlanc" type="submit">Voir la dépense</button>
-                                            </form>
-                                        </section>
-                                    </td>
-                                </tr>
-                                </tbody>
+                            </thead>
+                            <tbody>';
+                            $depensesGroupe = $dr->getDepenseByGid($groupe['gid']);
+                            $devise = $gr->getGroupById($groupe['gid'])->devise;
+                            $i = 0;
+                            foreach ($depensesGroupe as $depenseGroupe) {
+                                if($i == 3) {
+                                    break;
+                                }
+                                $newDepense = $dr->getDepenseByDid($depenseGroupe->did);
+                                $newParticipant = $ur->getUserById($depenseGroupe->uid);
+                                $newCaracteriser = $cr->getCaracteriserByDid($depenseGroupe->did);
+                                $newTag = $tr->getTagByTid($newCaracteriser->tid);
+                                echo '
+                                            <tr>
+                                                <td>
+                                                    <section class="membres2">';
+                                if (isset($newParticipant->pdp) && $newParticipant->pdp == 1) {
+                                    echo '<img src="images/profil_' . $newParticipant->uid . '.png" alt="profil" title="' . $newParticipant->prenom . ' ' . $newParticipant->nom . '" width="70px" height="70px">';
+                                } else {
+                                    echo '<img src="images/profil_default.png" alt="profil" title="' . $newParticipant->prenom . ' ' . $newParticipant->nom . '" width="70px" height="70px">';
+                                }
+                                echo '
+                                                        <h3>'. $newParticipant->prenom . ' ' . $newParticipant->nom . '</h3>
+                                                    </section>
+                                                </td>
+                                                <td>'. $newDepense->dateHeure .'</td>
+                                                <td>'. $newDepense->libelle . ' (' .  $newDepense->montant . $devise.')'.'</td>
+                                                <td>Tag: '. $newTag->tag .'</td>
+                                                <td>
+                                                    <section>
+                                                        <a href="depense.php?did=' . $newDepense->did . '">
+                                                            <button class="boutonBlanc" type="submit">Voir la dépense</button>
+                                                        </a>
+                                                    </section>
+                                                </td>
+                                            </tr>'; $i++;
+                            } echo '
+                            </tbody>
                             </table>
                             ';
                             $devise = $gr->getGroupById($groupe['gid'])->devise;
                             $depensesTotalParGroupe = $dr->getTotalDepenseByGid($groupe['gid']);
                             echo '
-                            <h2>Dépenses totales: '.round($depensesTotalParGroupe, 2) . $devise . '</h2>
+                            <h2>Dépenses totales: ' . round($depensesTotalParGroupe, 2) . $devise . '</h2>
                             <a href="groupe.php?gid=' . $groupe['gid'] . '" class="titleIndex">
                                 <button class="boutonPublier">Consulter le groupe</button>
                             </a>
