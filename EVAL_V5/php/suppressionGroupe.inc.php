@@ -10,6 +10,14 @@ if (isset($_POST['submit'])) {
     } else if ($_SESSION['uid'] != $groupe->uid) {
         $_SESSION['message'] = "<h1>Seul le créateur du groupe a la permission de le supprimer !</h1>";
     } else {
+
+        $depenses = $dr->getDepenseByGid($gid);
+        foreach ($depenses as $depense) {
+            $cr->removeCaracteriserByDid($depense->did);
+        }
+
+        $tr->removeTagByGid($gid);
+        $dr->removeDepenseByGid($gid);
         $pr->removeAllParticipate($gid);
         $gr->removeGroup($gid);
     }

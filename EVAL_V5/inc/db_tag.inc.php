@@ -67,5 +67,23 @@ class TagRepository {
         DBLink::disconnect($pdo);
         return $message;
     }
+
+    function removeTagByGid($gid) {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->prepare("DELETE FROM tag WHERE gid = :gid");
+            $stmt->bindValue(":gid", $gid);
+            if ($stmt->execute()) {
+                $message .= "Tag supprimé !";
+            } else {
+                $message .= "Erreur !";
+            }
+        } catch (Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($pdo);
+        return $message;
+    }
 }
 ?>

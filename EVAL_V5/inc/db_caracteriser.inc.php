@@ -66,6 +66,24 @@ class CaracteriserRepository {
         return $message;
     }
 
+    function removeCaracteriserByGid($gid) {
+        try {
+            $message = "";
+            $pdo = DBLink::connect2db(MYDB, $message);
+            $stmt = $pdo->prepare("DELETE FROM caracteriser WHERE gid = :gid");
+            $stmt->bindValue(":gid", $gid);
+            if ($stmt->execute()) {
+                $message .= "Caractériser supprimé !";
+            } else {
+                $message .= "Erreur !";
+            }
+        } catch (Exception $e) {
+            $message .= $e->getMessage() . '<br>';
+        }
+        DBLink::disconnect($pdo);
+        return $message;
+    }
+
     function updateCaracteriserByDidAndTid($did, $tid) {
         try {
             $message = "";

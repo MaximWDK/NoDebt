@@ -64,7 +64,7 @@ class UserRepository {
 
     function removeUser($uid) {
         $pdo = DBLink::connect2db(MYDB, $message);
-        $stmt = $pdo->prepare("DELETE FROM users where uid = :uid");
+        $stmt = $pdo->prepare("UPDATE users set estActif = 0 where uid = :uid");
         $stmt->bindParam(':uid', $uid);
         $stmt->execute();
         DBLink::disconnect($pdo);

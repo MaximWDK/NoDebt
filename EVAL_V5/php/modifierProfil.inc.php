@@ -1,6 +1,6 @@
 <?php
 require 'inc/checkConnexion.php';
-require ('inc/db_user.inc.php');
+require 'inc/db_user.inc.php';
 
 use User\UserRepository;
 $ur = new UserRepository();

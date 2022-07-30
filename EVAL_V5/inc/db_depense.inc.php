@@ -76,6 +76,18 @@ class DepenseRepository {
         DBLink::disconnect($pdo);
     }
 
+    function removeDepenseByGid($gid) {
+        $pdo = DBLink::connect2db(MYDB, $message);
+        $stmt = $pdo->prepare("DELETE FROM depense where gid = :gid");
+        $stmt->bindParam(':gid', $gid);
+        if(!$stmt->execute()) {
+            $_SESSION['message'] = "<h1>Erreur !</h1>";
+        } else {
+            $_SESSION['message'] = "<h1>Toutes les dépenses du groupe ont été supprimées avec succès !</h1>";
+        }
+        DBLink::disconnect($pdo);
+    }
+
     function modifyDepense($did, $dateHeure, $montant, $libelle, $uid) {
         $pdo = DBLink::connect2db(MYDB, $message);
         $stmt = $pdo->prepare("UPDATE depense set dateHeure = :dateHeure, montant = :montant, libelle = :libelle, uid = :uid where did = :did");

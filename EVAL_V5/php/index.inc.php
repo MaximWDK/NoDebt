@@ -39,8 +39,12 @@ function displayGroups() {
                                 <img src="images/groupes.png" alt="image groupe" width="900px">
                             </a>
                             <h2>Créateur:</h2>
-                            <section class="profilsGroupes">
-                                <img src="images/profil_' . $groupe['uid'] . '.png" alt="profil" title="' . $createur->prenom . ' ' . $createur->nom . '" width="70px" height="70px">
+                            <section class="profilsGroupes">';
+                            if (isset($createur->pdp) && $createur->pdp == 1) {
+                        echo '<img src="images/profil_' . $createur->uid . '.png" alt="profil" title="' . $createur->prenom . ' ' . $createur->nom . '" width="70px" height="70px">';
+                    } else {
+                        echo '<img src="images/profil_default.png" alt="profil" title="' . $createur->prenom . ' ' . $createur->nom . '" width="70px" height="70px">';
+                    } echo'    
                             </section>
                             <h2>Participants confirmés:</h2>
                             <section class="profilsGroupes">';
