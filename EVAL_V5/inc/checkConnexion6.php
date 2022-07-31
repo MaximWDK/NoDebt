@@ -29,7 +29,9 @@ $fr = new FacturesRepository();
 
 $_SESSION['message'] = "";
 $uid = $_SESSION['uid'];
-$did = $_GET['did'];
+$fid = $_GET['fid'];
+$facture = $fr->getFactureByFid($fid);
+$did = $facture->did;
 $depense = $dr->getDepenseByDid($did);
 $gid = $depense->gid;
 $participe = $pr->getParticipateByUidAndGid($uid, $gid);
@@ -37,11 +39,11 @@ $newParticipant = $ur->getUserById($uid);
 $devise = $gr->getGroupById($gid)->devise;
 $newCaracteriser = $cr->getCaracteriserByDid($did);
 $newTag = $tr->getTagByTid($newCaracteriser->tid);
-$facture = $fr->getFactureByDid($did);
+$facture = $fr->getFactureByFid($fid);
 
 if ($participe->uid == $_SESSION['uid'] && $gid == $participe->gid && $participe->estConfirme == 1) {
     $_SESSION['message'] = "";
 } else {
-    header("Location: index.php");
+    header('Location: factures.php?did=' . $did);
 }
 ?>

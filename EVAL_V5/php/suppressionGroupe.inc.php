@@ -10,14 +10,20 @@ if (isset($_POST['submit'])) {
     } else if ($_SESSION['uid'] != $groupe->uid) {
         $_SESSION['message'] = "<h1>Seul le créateur du groupe a la permission de le supprimer !</h1>";
     } else {
-
         $depenses = $dr->getDepenseByGid($gid);
         foreach ($depenses as $depense) {
+            $facture = $fr->getFactureByDid($depense->did);
+            if ($facture && unlink('uploads/factures/' . $facture->scan)) {
+            $fr->removeAllFacturesByDid($depense->did);
             $cr->removeCaracteriserByDid($depense->did);
+            $dr->removeDepenseByDid($depense->did);
+            } else {
+                $fr->removeAllFacturesByDid($depense->did);
+                $cr->removeCaracteriserByDid($depense->did);
+                $dr->removeDepenseByDid($depense->did);
+            }
         }
-
         $tr->removeTagByGid($gid);
-        $dr->removeDepenseByGid($gid);
         $pr->removeAllParticipate($gid);
         $gr->removeGroup($gid);
     }

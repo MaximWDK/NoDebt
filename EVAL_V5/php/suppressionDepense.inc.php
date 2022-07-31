@@ -8,8 +8,16 @@ if (isset($_POST['submit'])) {
     if(!$depense) {
         $_SESSION['message'] = "<h1>Cette dépense a déjà été supprimée !</h1>";
     } else {
-        $cr->removeCaracteriserByDid($did);
-        $dr->removeDepenseByDid($did);
+        $facture = $fr->getFactureByDid($did);
+        if ($facture && unlink('uploads/factures/' . $facture->scan)) {
+            $fr->removeAllFacturesByDid($did);
+            $cr->removeCaracteriserByDid($did);
+            $dr->removeDepenseByDid($did);
+        } else {
+            $fr->removeAllFacturesByDid($did);
+            $cr->removeCaracteriserByDid($did);
+            $dr->removeDepenseByDid($did);
+        }
     }
 }
 ?>

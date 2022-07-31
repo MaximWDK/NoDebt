@@ -57,7 +57,7 @@ function displayDepense() {
                                 <th>Date- heure</th>
                                 <th>Achat + Prix</th>
                                 <th>Tag</th>
-                                <th>Afficher Facture</th>
+                                <th>Gérer Factures</th>
                                 <th>Modifier Dépense</th>
                                 <th>Supprimer Dépense</th>
                             </tr>
@@ -76,9 +76,9 @@ function displayDepense() {
                             <td>'. $depense->libelle . ' (' .  $depense->montant . $devise.')'.'</td>
                             <td>Tag: '. $newTag->tag .'</td>
                             <td>
-                                <form action="images/facture.pdf" target="_blank">
-                                    <button class="boutonBlanc" type="submit">Voir la facture</button>
-                                </form>
+                                <a href="factures.php?did=' . $did . '" class="titleIndex">
+                                    <button class="boutonBlanc" type="submit">Factures</button>
+                                </a>
                             </td>
                             <td>
                                 <a href="modifierDepense.php?did=' . $did . '"  class="titleIndex">
