@@ -10,6 +10,7 @@ require 'inc/db_depense.inc.php';
 require 'inc/db_tag.inc.php';
 require 'inc/db_caracteriser.inc.php';
 require 'inc/db_factures.inc.php';
+require 'inc/db_versement.inc.php';
 
 use User\UserRepository;
 use Group\GroupRepository;
@@ -18,6 +19,7 @@ use Depense\DepenseRepository;
 use Tag\TagRepository;
 use Caracteriser\CaracteriserRepository;
 use Factures\FacturesRepository;
+use Versement\VersementRepository;
 
 $ur = new UserRepository();
 $gr = new GroupRepository();
@@ -26,6 +28,7 @@ $dr = new DepenseRepository();
 $tr = new TagRepository();
 $cr = new CaracteriserRepository();
 $fr = new FacturesRepository();
+$vr = new VersementRepository();
 
 $_SESSION['message'] = "";
 $uid = $_SESSION['uid'];

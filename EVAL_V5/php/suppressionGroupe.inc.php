@@ -23,6 +23,7 @@ if (isset($_POST['submit'])) {
                 $dr->removeDepenseByDid($depense->did);
             }
         }
+        $vr->deleteVersementByGid($gid);
         $tr->removeTagByGid($gid);
         $pr->removeAllParticipate($gid);
         $gr->removeGroup($gid);
